@@ -1,7 +1,7 @@
 blueprint:
-  name: blueprint-coding-example
+  name: blueprints-starter-example
   schema_version: "1.0.0"
-  description: "Sample blueprint to demonstrate linking components and passing vars"
+  description: "Sample blueprint to demonstrate linking workspaces and passing vars"
   inputs:
     - resource_group
     - region
@@ -10,10 +10,7 @@ blueprint:
     - list_any_flow_scalar
     - list_any_block_scalar
     - docker_ports
-  settings: # Master settings for all the cart items
-    - key: TF_VERSION
-      #type: string default type string
-      value: 0.13
+
   outputs:
     - key: blueprint-output
       value: $workitem.terraform_workitem2.outputs.nested_complex
@@ -26,7 +23,7 @@ blueprint:
         layer: test
         source:
           source_type: github
-          git_folder: "blueprint-inputs-outputs/tf-inputs-outputs"
+          git_folder: "blueprints-starter/tf-inputs-outputs"
           git_branch: "master"
         inputs:
           # default string
@@ -62,7 +59,7 @@ blueprint:
         layer: test
         source:
           source_type: github
-          git_folder: "blueprint-inputs-outputs/tf-inputs-outputs"
+          git_folder: "blueprints-starter/tf-inputs-outputs"
           git_branch: "master"
         inputs:
           # default string
