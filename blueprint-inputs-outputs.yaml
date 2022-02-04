@@ -26,7 +26,7 @@ blueprint:
         layer: test
         source:
           source_type: github
-          git_folder: "blueprints-inputs-outputs/tf-inputs-outputs"
+          git_folder: "blueprint-inputs-outputs/tf-inputs-outputs"
           git_branch: "master"
         inputs:
           # default string
@@ -62,7 +62,7 @@ blueprint:
         layer: test
         source:
           source_type: github
-          git_folder: "blueprints-inputs-outputs/tf-inputs-outputs"
+          git_folder: "blueprint-inputs-outputs/tf-inputs-outputs"
           git_branch: "master"
         inputs:
           # default string
