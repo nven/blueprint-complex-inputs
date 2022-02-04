@@ -1,0 +1,31 @@
+resource_group: default
+region: us-south
+sample_var: testconfig
+# Complex vars - https://yaml-multiline.info/
+# HCL type for variable is defined in blueprint workitem
+
+# Flow scalar double-quoted:  " must be prefixed by \
+list_any_flow_scalar:  "[\"36\", \"mqm-grand\", \"madison-circle-garden\"]"
+
+# Block scalar literal 
+list_any_block_scalar: |
+          ["aria", "belagio", "paris"]
+   
+# Block scalar literal - multi line       
+docker_ports: | 
+  [
+    {
+      internal = 9900
+      external = 9900
+      protocol = "tcp"
+    },
+    {
+      internal = 9901
+      external = 9901
+      protocol = "ldp"
+    }
+  ]
+
+
+boolian_var: false  
+

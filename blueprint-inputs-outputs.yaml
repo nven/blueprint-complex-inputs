@@ -1,0 +1,96 @@
+blueprint:
+  name: blueprint-coding-example
+  schema_version: "1.0.0"
+  description: "Sample blueprint and input config to demonstrate linking components and setup"
+  inputs:
+    - resource_group
+    - region
+    - sample_var
+    - boolian_var
+    - list_any_flow_scalar
+    - list_any_block_scalar
+    - docker_ports
+  settings: # Master settings for all the cart items
+    - key: TF_VERSION
+      #type: string default type string
+      value: 0.13
+  outputs:
+    - key: blueprint-output
+      value: $workitem.terraform_workitem2.outputs.nested_complex
+  source :
+    git_repo_url: "https://github.ibm.com/steve-strutt"
+    #git_release: "v1.0.1"
+    git_branch: "main"
+    workitems:
+      - name: terraform_workitem1
+        layer: test
+        source :
+          source_type: github
+          git_folder: "environment-complex-vars/tf-inputs-outputs"
+          git_branch: "master"
+        inputs:
+            # default string 
+          - key: sample_var
+            value: $blueprint.sample_var
+            # default string 
+
+          - key: image_id
+            value: ami-image
+            # HCL type: list(any) passed as flow scalar double-quoted 
+          - key: list_any_flow_scalar
+            value: $blueprint.list_any_flow_scalar
+            type: list(any)
+
+            # HCL type: list(any) passed as block scalar double-quoted 
+          - key: list_any_block_scalar
+            value: $blueprint.list_any_block_scalar
+            type: list(any) 
+
+          - key: docker_ports
+            value: $blueprint.docker_ports
+            type: |
+              list(object({
+                internal = number
+                external = number
+                protocol = string
+              })
+        outputs:
+          - key: nested_complex
+          - key: test_tuple
+
+      - name: terraform_workitem2
+        layer: test
+        source :
+          source_type: github
+          git_folder: "environment-complex-vars/tf-inputs-outputs"
+          git_branch: "master"
+        inputs:
+            # default string 
+          - key: sample_var
+            value: $blueprint.sample_var
+            # default string 
+
+          - key: image_id
+            value: ami-image
+            # HCL type: list(any) passed as flow scalar double-quoted 
+          - key: list_any_flow_scalar
+            value: $blueprint.list_any_flow_scalar
+            type: list(any)
+
+            # HCL type: list(any) passed as block scalar double-quoted 
+          - key: list_any_block_scalar
+            value: $blueprint.list_any_block_scalar
+            type: list(any) 
+
+          - key: docker_ports
+            value: $workitem.terraform_workitem1.nested_complex
+            type: |
+              list(object({
+                internal = number
+                external = number
+                protocol = string
+              })
+        outputs:
+          - key: nested_complex
+          - key: test_tuple
+      
