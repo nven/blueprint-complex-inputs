@@ -1,7 +1,7 @@
 blueprint:
   name: blueprint-coding-example
   schema_version: "1.0.0"
-  description: "Sample blueprint and input config to demonstrate linking components and setup"
+  description: "Sample blueprint to demonstrate linking components and passing vars"
   inputs:
     - resource_group
     - region
@@ -17,34 +17,34 @@ blueprint:
   outputs:
     - key: blueprint-output
       value: $workitem.terraform_workitem2.outputs.nested_complex
-  source :
-    git_repo_url: "https://github.ibm.com/steve-strutt"
+  source:
+    git_repo_url: "https://github.ibm.com/schematics-solutions"
     #git_release: "v1.0.1"
     git_branch: "main"
     workitems:
       - name: terraform_workitem1
         layer: test
-        source :
+        source:
           source_type: github
-          git_folder: "environment-complex-vars/tf-inputs-outputs"
+          git_folder: "blueprints-inputs-outputs/tf-inputs-outputs"
           git_branch: "master"
         inputs:
-            # default string 
+          # default string
           - key: sample_var
             value: $blueprint.sample_var
-            # default string 
+            # default string
 
           - key: image_id
             value: ami-image
-            # HCL type: list(any) passed as flow scalar double-quoted 
+            # HCL type: list(any) passed as flow scalar double-quoted
           - key: list_any_flow_scalar
             value: $blueprint.list_any_flow_scalar
             type: list(any)
 
-            # HCL type: list(any) passed as block scalar double-quoted 
+            # HCL type: list(any) passed as block scalar double-quoted
           - key: list_any_block_scalar
             value: $blueprint.list_any_block_scalar
-            type: list(any) 
+            type: list(any)
 
           - key: docker_ports
             value: $blueprint.docker_ports
@@ -60,27 +60,27 @@ blueprint:
 
       - name: terraform_workitem2
         layer: test
-        source :
+        source:
           source_type: github
-          git_folder: "environment-complex-vars/tf-inputs-outputs"
+          git_folder: "blueprints-inputs-outputs/tf-inputs-outputs"
           git_branch: "master"
         inputs:
-            # default string 
+          # default string
           - key: sample_var
             value: $blueprint.sample_var
-            # default string 
+            # default string
 
           - key: image_id
             value: ami-image
-            # HCL type: list(any) passed as flow scalar double-quoted 
+            # HCL type: list(any) passed as flow scalar double-quoted
           - key: list_any_flow_scalar
             value: $blueprint.list_any_flow_scalar
             type: list(any)
 
-            # HCL type: list(any) passed as block scalar double-quoted 
+            # HCL type: list(any) passed as block scalar double-quoted
           - key: list_any_block_scalar
             value: $blueprint.list_any_block_scalar
-            type: list(any) 
+            type: list(any)
 
           - key: docker_ports
             value: $workitem.terraform_workitem1.nested_complex
@@ -93,4 +93,3 @@ blueprint:
         outputs:
           - key: nested_complex
           - key: test_tuple
-      
