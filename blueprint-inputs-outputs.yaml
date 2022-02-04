@@ -18,7 +18,7 @@ blueprint:
     - key: blueprint-output
       value: $workitem.terraform_workitem2.outputs.nested_complex
   source:
-    git_repo_url: "https://github.ibm.com/schematics-solutions"
+    git_repo_url: "https://github.ibm.com/schematics-solution"
     #git_release: "v1.0.1"
     git_branch: "main"
     workitems:
