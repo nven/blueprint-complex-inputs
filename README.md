@@ -1,18 +1,15 @@
 # Blueprints all in one example to deploy a simple Blueprints environment
 
-This is a simple all-in-one starter example to demonstrate the capabilites of IBM Cloud Schematics Blueprints to link multiple workspaces, passing variables between workspaces and returning an output from deploying the blueprint.  
+This is a simple starter example to demonstrate the capabilites of IBM Cloud Schematics Blueprints to link multiple workspaces, passing variables between workspaces and returning an output from deploying the blueprint.  
 
-The [5.3 Full stack IKS (all in one) tutorial](https://github.ibm.com/schematics-solution/schematics-blueprints/wiki/5.3-Full-stack-vsi-(all-in-one)-tutorial) on the Blueprints wiki can be followed as a guideline of how to deploy this example.  
+The [5.2 Blueprints Starter tutorial](https://github.ibm.com/schematics-solution/schematics-blueprints/wiki/5.2-Blueprints-Starter) on the Blueprints wiki can be followed as a guideline of how to deploy this example.  
 
 Following types of resources are deployed:
 - null-resource    (no IBM Cloud resources are deployed)
 
-The blueprint is comprised of two linked workitems. These create two Schematics Workspaces
+The blueprint is comprised of two linked workitems. These create two Schematics Terraform Workspaces
 - terraform-workitem1 
 - terraform-workitem2
-
-
-The blueprint demonstrates deploying a full application stack composed from 4 components. 
 
 The logical structure and file naming of this Blueprints example is illustrated below. All definitions and Terraform code are included within this one repo. 
 
@@ -77,7 +74,7 @@ $ ibmcloud schematics environment get -id environment_id -profile variables
 
 $ ibmcloud schematics job run -rt env -n destroy -id environment_id
 
-$ ibmcloud schematics job run -rt env -n delete -id environment_id
+$ ibmcloud schematics job run -rt env -n delete -id environment_id -force
 ```
 
 ## Forking and modifying the example
