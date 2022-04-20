@@ -27,6 +27,8 @@ blueprint:
           git_branch: "master"
         inputs:
           # default string
+          - key: TF_VERSION
+            value: 1.0
           - key: sample_var
             value: $blueprint.sample_var
             # default string
@@ -63,6 +65,8 @@ blueprint:
           git_branch: "master"
         inputs:
           # default string
+          - key: TF_VERSION
+            value: 1.0
           - key: sample_var
             value: $blueprint.sample_var
             # default string
