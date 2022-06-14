@@ -1,48 +1,61 @@
-# Blueprints all in one example to deploy a simple Blueprints environment
+# Blueprints example of working with complex Terraform variables 
 
-This is a simple starter example to demonstrate the capabilites of IBM Cloud Schematics Blueprints to link multiple workspaces, passing variables between workspaces and returning an output from deploying the blueprint.  
+This is a simple starter example to demonstrate the use of complex variables with Schematics Blueprints. 
 
-The [5.2 Blueprints Starter tutorial](https://github.ibm.com/schematics-solution/schematics-blueprints/wiki/5.2-Blueprints-Starter) on the Blueprints wiki can be followed as a guideline of how to deploy this example.  
-
-Following types of resources are deployed:
+Following resources are deployed:
 - null-resource    (no IBM Cloud resources are deployed)
 
-The blueprint is comprised of two linked workitems. These create two Schematics Terraform Workspaces
-- terraform-workitem1 
-- terraform-workitem2
+## Blueprint definition - complex-blueprint.yaml
 
-The logical structure and file naming of this Blueprints example is illustrated below. All definitions and Terraform code are included within this one repo. 
+The blueprint links two Terraform configs as Workspaces. 
+- terraform_module1
+- terraform_module1
 
+TF configs are sourced from https://github.ibm.com/steve-strutt/blueprint-examples-modules/
 ```
-env-starter.yaml                                 (blueprint environment definition)
-├── config-starter.yaml                          (config)
-└── blueprintdef-starter.yaml                    (blueprint definition)
-    └── tf-inputs-outputs                        (Terraform config)
+Blueprint file: complex-blueprint.yaml
+├── terraform_module1
+|    └── source: github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs
+└── terraform_module2
+     └── source: github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs
 ```
 
-## Blueprint Environment Inputs
-| Name | Type | Value | Description |
-|------|------|------|----------------|
-| name | string | Blueprints Starter Sample | |
-| location| string | us-south | Schematics manage from region |
-| resource_group | string | Default | Resource group for Schematics IAM access control |
-
-
-## Config Inputs
+### Blueprint definition inputs 
+The complex-blueprint.yaml definition file accepts the following inputs:
 
 | Name | Type | Value | Description |
 |------|------|------|----------------|
-| region | string | us-east | Sample var for resource deployment region |
-| resource_group_name | string | default | Sample var for resource group |
-| sample_var | string | testconfig | Sample var |
-| list_any_flow_scalar | list(any) |  ["36", "mqm-grand", "madison-circle-garden"] |
-| docker_ports  |  list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  [{  internal = 9900 <br>       external = 9900 <br>  protocol = "tcp" <br>   },  { <br>  internal = 9901 <br>  external = 9901 <br> protocol = "ldp" }] | Sample complex input variable | 
+| region | string | null | Sample string var for resource deployment region |
+| resource_group | string | null | Sample string var for resource group |
+| sample_var | string | null | Sample string var |
+| boolian_var | string | null | true/false |
+| list_any_flow_scalar | list(any) |  null |
+| list_any_block_scalar | list(any) |  null |
+| docker_ports  |  list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  null | Sample complex input variable | 
+
+
 
 ## Blueprints Outputs
+The complex-blueprint.yaml definition creates the following outputs:
 
 | Name | Type | Value | Description |
 |------|------|------|----------------|
 | nested_complex | list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  | Sample output dynamically created |
+
+### Input file - complex-input.yaml
+The input file defines the variable values for all the required Blueprint definition inputs. Review the file contents to observe the difference in formating for the yaml scalar and block scalar formats. 
+
+| Name | Type | Value | Description |
+|------|------|------|----------------|
+| region | string | us-east | Sample var for resource deployment region |
+| resource_group | string | default | Sample var for resource group |
+| sample_var | string | testconfig | Sample var |
+| boolian_var | string | false | Sample boolian var |
+| list_any_flow_scalar | list(any) |  ["36", "mqm-grand", "madison-circle-garden"] | list in yaml scalar format  |
+| list_any_block_scalar: | list(any) | [ <br>   "36",  <br>  "mqm-grand",  <br> "madison-circle-garden"  <br>   ] | list in yaml block scalar format |
+| docker_ports  |  list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  [{  internal = 9900 <br>       external = 9900 <br>  protocol = "tcp" <br>   },  { <br>  internal = 9901 <br>  external = 9901 <br> protocol = "ldp" }] | Sample complex input variable | 
+
+
 
 
 
@@ -50,40 +63,49 @@ env-starter.yaml                                 (blueprint environment definiti
 - Resource group `Default` exists for Schematics IAM access control. 
 
 
+
+
+## Prerequisites
+1. Install the Schematics CLI plugin by follow the instructions in the [documentation](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-cli)  
+2. Configure [IAM access permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access) for the Schematics Blueprints service. 
+3. Set Schematics Target Region
+The target (manage from) Schematics region for the Blueprint instance is determined by the IBM Cloud CLI target region. The region can be set with the `ibmcloud target` command.
+
+
 ## Usage 
-This example can be deployed as is. Alternatively modify the example as per the instructions below. 
+**TEMPORARY USE OF payload_complex.json file from /test folder for CLI testing**
 
-To deploy in us-south, the IBM Cloud CLI must be configured with us-south as the target region. 
+**copy payload_complex.json to CLI execution folder**  
+
+Choose a Resource Group to associate the Blueprint with for Access Control. Available Resource Groups can be confirmed from the [Console Resource Groups](https://cloud.ibm.com/account/resource-groups) page.  
+
+Depending on your account the RG in the payload_complex.json file may need changing to the name of an existing RG. Note some accounts have 'Default', others 'default'.  
 
 
 ```
-$ ibmcloud schematics environment external -repo-url https://github.ibm.com/schematics-solution/blueprints-starter -env-file env-starter.yaml -profile detailed
+$ ibmcloud target -r <region>
 
-$ ibmcloud target -r us-south
-
-
-$ ibmcloud schematics environment create
-
-$ ibmcloud schematics job run -rt env -n init -id environment_id
-
-$ ibmcloud schematics environment get -id environment_id -profile detailed
-
-$ ibmcloud schematics job run -rt env -n install -id environment_id
-
-$ ibmcloud schematics environment get -id environment_id -profile variables
-
-$ ibmcloud schematics job run -rt env -n destroy -id environment_id
-
-$ ibmcloud schematics job run -rt env -n delete -id environment_id -force
+$ ibmcloud schematics blueprint create --file payload_complex.json
 ```
 
-## Forking and modifying the example
-To experiment with Blueprints, fork this example to a personal repo. Any of the definitions or TF configs can be modified. Follow the instructions in the Blueprints wiki for [Modifying the Sample App](https://github.ibm.com/schematics-solution/schematics-blueprints/wiki/5.4-Tutorial-Modifying-the-Environment-Examples) Use the git url of the forked repo as input to the `ibmcloud schematics environment external` command. 
+CLI flag support due 27th June 2022
+```
+$ ibmcloud schematics blueprint create 
+-name=Blueprint_Complex
+-resource_group=Default
+-bp_git_url https://github.ibm.com/steve-strutt/blueprint-example-modules/complex_blueprint.yaml
+-input_git_url https://github.ibm.com/steve-strutt/blueprint-example-modules/complex_input.yaml
+```
 
-Outline instructions:
-- Fork the repo
-- Replace all occurances of `schematics-solution` in the env and config files with the new github org. 
-- Modify config inputs for your environment
-- Proceed as per the tutorial
+```
+$ ibmcloud schematics blueprint install -id blueprint_id
 
+$ ibmcloud schematics blueprint jobs -id blueprint_id
+
+$ ibmcloud schematics blueprint get -id blueprint_id
+
+$ ibmcloud schematics blueprint destroy -id blueprint_id
+
+$ ibmcloud schematics blueprint delete -id blueprint_id
+```
 

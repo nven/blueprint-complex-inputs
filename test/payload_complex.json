@@ -21,8 +21,7 @@
             }
         }
     ],
-    "inputs": [
-    ],
+    "inputs": [],
     "description": "Deploys a simple two module blueprint",
     "resource_group": "Default"
 }
