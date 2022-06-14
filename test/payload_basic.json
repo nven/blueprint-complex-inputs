@@ -1,0 +1,28 @@
+{
+    "name": "Blueprint Complex Inputs",
+    "schema_version": "1.0.0",
+    "source": {
+        "source_type": "git_hub",
+        "git": {
+            "git_repo_url": "https://github.ibm.com/schematics-solution/blueprint-complex-inputs",
+            "git_repo_folder": "complex-blueprint.yaml",
+            "git_branch": "master"
+        }
+    },
+    "config": [
+        {
+            "source": {
+                "source_type": "git_hub",
+                "git": {
+                    "git_repo_url": "https://github.ibm.com/schematics-solution/blueprint-complex-inputs",
+                    "git_repo_folder": "complex-input.yaml",
+                    "git_branch": "master"
+                }
+            }
+        }
+    ],
+    "inputs": [
+    ],
+    "description": "Deploys a simple two module blueprint",
+    "resource_group": "Default"
+}
