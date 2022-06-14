@@ -18,77 +18,77 @@ source:
   git_repo_url: "https://github.ibm.com/blueprint-examples-modules"
   #git_release: "v1.0.1"
   git_branch: "main"
-  modules:
-    - name: terraform_module1
-      source:
-        source_type: github
-        git_folder: "blueprints-starter/tf-inputs-outputs"
-        git_branch: "master"
-      inputs:
+modules:
+  - name: terraform_module1
+    source:
+      source_type: github
+      git_folder: "blueprints-starter/tf-inputs-outputs"
+      git_branch: "master"
+    inputs:
+      # default string
+      - name: TF_VERSION
+        value: 1.0
+      - name: sample_var
+        value: $blueprint.sample_var
         # default string
-        - name: TF_VERSION
-          value: 1.0
-        - name: sample_var
-          value: $blueprint.sample_var
-          # default string
 
-        - name: image_id
-          value: ami-image
-          # HCL type: list(any) passed as flow scalar double-quoted
-        - name: list_any_flow_scalar
-          value: $blueprint.list_any_flow_scalar
-          type: list(any)
+      - name: image_id
+        value: ami-image
+        # HCL type: list(any) passed as flow scalar double-quoted
+      - name: list_any_flow_scalar
+        value: $blueprint.list_any_flow_scalar
+        type: list(any)
 
-          # HCL type: list(any) passed as block scalar double-quoted
-        - name: list_any_block_scalar
-          value: $blueprint.list_any_block_scalar
-          type: list(any)
+        # HCL type: list(any) passed as block scalar double-quoted
+      - name: list_any_block_scalar
+        value: $blueprint.list_any_block_scalar
+        type: list(any)
 
-        - name: docker_ports
-          value: $blueprint.docker_ports
-          type: |
-            list(object({
-              internal = number
-              external = number
-              protocol = string
-            })
-      outputs:
-        - name: nested_complex
-        - name: test_tuple
+      - name: docker_ports
+        value: $blueprint.docker_ports
+        type: |
+          list(object({
+            internal = number
+            external = number
+            protocol = string
+          })
+    outputs:
+      - name: nested_complex
+      - name: test_tuple
 
-    - name: terraform_module2
-      source:
-        source_type: github
-        git_folder: "https://github.ibm.com/blueprint-examples-modules"
-        git_branch: "master"
-      inputs:
+  - name: terraform_module2
+    source:
+      source_type: github
+      git_folder: "https://github.ibm.com/blueprint-examples-modules"
+      git_branch: "master"
+    inputs:
+      # default string
+      - name: TF_VERSION
+        value: 1.0
+      - name: sample_var
+        value: $blueprint.sample_var
         # default string
-        - name: TF_VERSION
-          value: 1.0
-        - name: sample_var
-          value: $blueprint.sample_var
-          # default string
 
-        - name: image_id
-          value: ami-image
-          # HCL type: list(any) passed as flow scalar double-quoted
-        - name: list_any_flow_scalar
-          value: $blueprint.list_any_flow_scalar
-          type: list(any)
+      - name: image_id
+        value: ami-image
+        # HCL type: list(any) passed as flow scalar double-quoted
+      - name: list_any_flow_scalar
+        value: $blueprint.list_any_flow_scalar
+        type: list(any)
 
-          # HCL type: list(any) passed as block scalar double-quoted
-        - name: list_any_block_scalar
-          value: $blueprint.list_any_block_scalar
-          type: list(any)
+        # HCL type: list(any) passed as block scalar double-quoted
+      - name: list_any_block_scalar
+        value: $blueprint.list_any_block_scalar
+        type: list(any)
 
-        - name: docker_ports
-          value: $module.terraform_module1.nested_complex
-          type: |
-            list(object({
-              internal = number
-              external = number
-              protocol = string
-            })
-      outputs:
-        - name: nested_complex
-        - name: test_tuple
+      - name: docker_ports
+        value: $module.terraform_module1.nested_complex
+        type: |
+          list(object({
+            internal = number
+            external = number
+            protocol = string
+          })
+    outputs:
+      - name: nested_complex
+      - name: test_tuple
