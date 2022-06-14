@@ -14,16 +14,12 @@ inputs:
 outputs:
   - name: blueprint-output
     value: $module.terraform_module2.outputs.nested_complex
-source:
-  git_repo_url: "https://github.ibm.com/blueprint-examples-modules"
-  #git_release: "v1.0.1"
-  git_branch: "main"
 modules:
   - name: terraform_module1
     source:
       git: 
         source_type: github
-        git_folder: "blueprints-starter/tf-inputs-outputs"
+        git_repo_url: "https://github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
@@ -61,7 +57,7 @@ modules:
     source:
       git: 
         source_type: github
-        git_folder: "https://github.ibm.com/blueprint-examples-modules"
+        git_repo_url: "https://github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
