@@ -19,7 +19,7 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.ibm.com/schematics-solution/tree/master/blueprint-examples-modules/tf-inputs-outputs"
+        git_repo_url: "https://github.ibm.com/steve-strutt/blueprint-examples-modules/tree/master/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
@@ -57,7 +57,7 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.ibm.com/schematics-solution/tree/master/blueprint-examples-modules/tf-inputs-outputs"
+        git_repo_url: "https://github.ibm.com/steve-strutt/tree/master/blueprint-examples-modules/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
