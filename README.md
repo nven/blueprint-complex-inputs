@@ -11,13 +11,13 @@ The blueprint links two Terraform configs as Workspaces.
 - terraform_module1
 - terraform_module1
 
-TF configs are sourced from https://github.ibm.com/steve-strutt/blueprint-examples-modules/
+TF configs are sourced from https://github.com/Cloud-Schematics/blueprint-example-modules
 ```
 Blueprint file: complex-blueprint.yaml
 ├── terraform_module1
-|    └── source: github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs
+|    └── source: github.com/Cloud-Schematics/blueprint-example-modules/tf-inputs-outputs
 └── terraform_module2
-     └── source: github.ibm.com/steve-strutt/blueprint-examples-modules/tf-inputs-outputs
+     └── source: github.com/Cloud-Schematics/blueprint-example-modules/tf-inputs-outputs
 ```
 
 ### Blueprint definition inputs 
@@ -93,8 +93,8 @@ CLI flag support due 27th June 2022
 $ ibmcloud schematics blueprint create 
 -name=Blueprint_Complex
 -resource_group=Default
--bp_git_url https://github.ibm.com/steve-strutt/blueprint-example-modules/complex_blueprint.yaml
--input_git_url https://github.ibm.com/steve-strutt/blueprint-example-modules/complex_input.yaml
+-bp_git_url https://github.ibm.com/schematics-solution/blueprint-example-modules/complex_blueprint.yaml
+-input_git_url https://github.ibm.com/schematics-solution/blueprint-example-modules/complex_input.yaml
 ```
 
 ```
