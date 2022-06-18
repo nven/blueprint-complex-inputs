@@ -1,4 +1,4 @@
-name: blueprints-starter-example
+name: blueprints-complex-inputs
 type: blueprint
 schema_version: "1.0.0"
 description: "Sample blueprint to demonstrate passing of complex Terraform variables"
@@ -19,7 +19,7 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.ibm.com/steve-strutt/blueprint-examples-modules/tree/master/tf-inputs-outputs"
+        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/master/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
@@ -57,7 +57,7 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.ibm.com/steve-strutt/blueprint-examples-modules/tree/master/tf-inputs-outputs"
+        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/master/tf-inputs-outputs"
         git_branch: "master"
     inputs:
       # default string
