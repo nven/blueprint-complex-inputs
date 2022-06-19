@@ -2,6 +2,12 @@
 
 This is a simple starter example to demonstrate the use of complex variables with Schematics Blueprints. 
 
+The default variable type is string and does not need to be specified in the blueprint.yaml definition. Where Terraform configs and modules require complex input variables, the Terraform varaible type must be specified in the module block on the module input statement. 
+
+Input files support specifying complex Terraform input values in yaml format. The format of a number of common complex types is illustrated in the complex-input.yaml file section below.   
+
+Blueprint CLI inputs only support string values. 
+
 Following resources are deployed:
 - null-resource    (no IBM Cloud resources are deployed)
 
@@ -93,8 +99,8 @@ CLI flag support due 27th June 2022
 $ ibmcloud schematics blueprint create 
 -name=Blueprint_Complex
 -resource_group=Default
--bp_git_url https://github.ibm.com/schematics-solution/blueprint-example-modules/complex_blueprint.yaml
--input_git_url https://github.ibm.com/schematics-solution/blueprint-example-modules/complex_input.yaml
+-bp_git_url https://github.com/Cloud-Schematics/blueprint-complex-inputs/complex_blueprint.yaml
+-input_git_url https://github.com/Cloud-Schematics/blueprint-complex-inputs/complex_input.yaml
 ```
 
 ```
