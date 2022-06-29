@@ -19,8 +19,8 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/master/tf-inputs-outputs"
-        git_branch: "master"
+        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/main/tf-inputs-outputs"
+        git_branch: "main"
     inputs:
       # default string
       - name: TF_VERSION
@@ -57,8 +57,8 @@ modules:
     source:
       git: 
         source_type: github
-        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/master/tf-inputs-outputs"
-        git_branch: "master"
+        git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/main/tf-inputs-outputs"
+        git_branch: "main"
     inputs:
       # default string
       - name: TF_VERSION
