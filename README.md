@@ -88,7 +88,7 @@ Example commands
 ```sh
 $ ibmcloud target -r <region>
 
-$ ibmcloud schematics blueprint create -name Blueprint_Basic -resource-group Default -bp-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -bp-git-branch main -bp-git-file complex-blueprint.yaml -input-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -input-git-branch main -input-git-file complex-input.yaml 
+$ ibmcloud schematics blueprint create -name Blueprint_Complex -resource-group Default -bp-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -bp-git-branch main -bp-git-file complex-blueprint.yaml -input-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -input-git-branch main -input-git-file complex-input.yaml 
 
 
 $ ibmcloud schematics blueprint install -id blueprint_id
@@ -104,4 +104,6 @@ $ ibmcloud schematics blueprint delete -id blueprint_id
 
 ## Next Steps
 
+Looking for more samples? Check out the [{{site.data.keyword.bplong_notm}} GitHub repository](https://github.com/orgs/Cloud-Schematics/repositories/?q=topic:blueprint). 
 
+Check the example Readme files for further Blueprint customisation and usage scenarios for each sample. 
