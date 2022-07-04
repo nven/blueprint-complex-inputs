@@ -1,23 +1,18 @@
 # Blueprints example of working with complex Terraform variables 
 
-This is a simple starter example to demonstrate the use of complex variables with Schematics Blueprints. 
+This is a starter example to demonstrate creating a simple scalable Blueprint from two linked Workspaces. It demonstrates working with complex Terraform input variables and resource data passing between the Workspaces. No cloud resources are created by this example.
 
-The default variable type is string and does not need to be specified in the blueprint.yaml definition. Where Terraform configs and modules require complex input variables, the Terraform varaible type must be specified in the module block on the module input statement. 
-
-Input files support specifying complex Terraform input values in yaml format. The format of a number of common complex types is illustrated in the complex-input.yaml file section below.   
-
-Blueprint CLI inputs only support string values. 
-
-Following resources are deployed:
+Following Terraform resources are deployed:
 - null-resource    (no IBM Cloud resources are deployed)
 
 ## Blueprint definition - complex-blueprint.yaml
 
-The blueprint links two Terraform configs as Workspaces. 
+The Blueprint creates two modules, linking two Terraform configs as Workspaces. 
 - terraform_module1
 - terraform_module1
 
-TF configs are sourced from https://github.com/Cloud-Schematics/blueprint-example-modules
+
+The module TF configs are sourced from https://github.com/Cloud-Schematics/blueprint-example-modules
 ```
 Blueprint file: complex-blueprint.yaml
 ├── terraform_module1
@@ -63,55 +58,50 @@ The input file defines the variable values for all the required Blueprint defini
 
 
 
-
-
-## Prerequisities
-- Resource group `Default` exists for Schematics IAM access control. 
-
-
-
-
 ## Prerequisites
 1. Install the Schematics CLI plugin by follow the instructions in the [documentation](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-cli)  
 2. Configure [IAM access permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access) for the Schematics Blueprints service. 
 3. Set Schematics Target Region
 The target (manage from) Schematics region for the Blueprint instance is determined by the IBM Cloud CLI target region. The region can be set with the `ibmcloud target` command.
 
-
 ## Usage 
-**TEMPORARY USE OF payload_complex.json file from /test folder for CLI testing**
-
-**copy payload_complex.json to CLI execution folder**  
-
-Choose a Resource Group to associate the Blueprint with for Access Control. Available Resource Groups can be confirmed from the [Console Resource Groups](https://cloud.ibm.com/account/resource-groups) page.  
-
-Depending on your account the RG in the payload_complex.json file may need changing to the name of an existing RG. Note some accounts have 'Default', others 'default'.  
+The example command input here uses the minimum rights to create new resources. It assumes that the IBM Cloud resource group `Default` exists and the user has been granted Schematics access permissions to this group. 
 
 
-```
+
+
+
+
+
+The following parameters are used for the `blueprint create` configuration. 
+- Name of the blueprint: `Blueprint_complex_inputs`
+- Schematics management resource group: `Default`
+- Blueprint URL: `https://github.com/Cloud-Schematics/blueprint-complex-inputs`
+- Blueprint file: `complex-blueprint.yaml`
+- Blueprint Git branch `main`
+- Input file URL: `https://github.com/Cloud-Schematics/blueprint-complex-inputs`
+- Input file: `complex-input.yaml` 
+- Input file Git branch `main`
+
+
+Example commands
+```sh
 $ ibmcloud target -r <region>
 
-$ ibmcloud schematics blueprint create --file payload_complex.json
-```
+$ ibmcloud schematics blueprint create -name Blueprint_Basic -resource-group Default -bp-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -bp-git-branch main -bp-git-file complex-blueprint.yaml -input-git-url https://github.com/Cloud-Schematics/blueprint-complex-inputs -input-git-branch main -input-git-file complex-input.yaml 
 
-CLI flag support due 27th June 2022
-```
-$ ibmcloud schematics blueprint create 
--name=Blueprint_Complex
--resource_group=Default
--bp_git_url https://github.com/Cloud-Schematics/blueprint-complex-inputs/complex_blueprint.yaml
--input_git_url https://github.com/Cloud-Schematics/blueprint-complex-inputs/complex_input.yaml
-```
 
-```
 $ ibmcloud schematics blueprint install -id blueprint_id
 
-$ ibmcloud schematics blueprint jobs -id blueprint_id
+$ ibmcloud schematics blueprint job list -id blueprint_id
 
-$ ibmcloud schematics blueprint get -id blueprint_id
+$ ibmcloud schematics blueprint get -id blueprint_id -profile outputs
 
 $ ibmcloud schematics blueprint destroy -id blueprint_id
 
 $ ibmcloud schematics blueprint delete -id blueprint_id
 ```
+
+## Next Steps
+
 
