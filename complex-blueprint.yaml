@@ -80,7 +80,7 @@ modules:
         type: list(any)
 
       - name: docker_ports
-        value: $workitem.terraform_module1.nested_complex
+        value: $module.terraform_module1.nested_complex
         type: |
           list(object({
             internal = number

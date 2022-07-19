@@ -2,7 +2,7 @@ resource_group: default
 region: us-south
 sample_var: testconfig
 # Complex vars - https://yaml-multiline.info/
-# HCL type for variable is defined in blueprint workitem
+# HCL type for variable is defined in blueprint module
 
 # Block scalar literal 
 list_any_flow_scalar:  "[\"36\", \"mqm-grand\", \"madison-circle-garden\"]"
