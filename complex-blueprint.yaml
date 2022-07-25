@@ -19,6 +19,7 @@ settings:
     value: 1.0    
 modules:
   - name: terraform_module1
+    module_type: terraform
     source:
       source_type: github
       git: 
@@ -57,6 +58,7 @@ modules:
       - name: test_tuple
 
   - name: terraform_module2
+    module_type: terraform
     source:
       source_type: github
       git: 
