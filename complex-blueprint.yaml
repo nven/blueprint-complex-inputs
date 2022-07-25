@@ -14,11 +14,14 @@ inputs:
 outputs:
   - name: blueprint-output
     value: $module.terraform_module2.outputs.nested_complex
+settings:
+  - name: TF_VERSION
+    value: 1.0    
 modules:
   - name: terraform_module1
     source:
+      source_type: github
       git: 
-        source_type: github
         git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/main/tf-inputs-outputs"
         git_branch: "main"
     inputs:
@@ -55,8 +58,8 @@ modules:
 
   - name: terraform_module2
     source:
+      source_type: github
       git: 
-        source_type: github
         git_repo_url: "https://github.com/Cloud-Schematics/blueprint-example-modules/tree/main/tf-inputs-outputs"
         git_branch: "main"
     inputs:
