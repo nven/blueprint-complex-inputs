@@ -29,7 +29,7 @@ The complex-blueprint.yaml definition file accepts the following inputs:
 | region | string | null | Sample string var for resource deployment region |
 | resource_group | string | null | Sample string var for resource group |
 | sample_var | string | null | Sample string var |
-| boolian_var | string | null | true/false |
+| boolean_var | string | null | true/false |
 | list_any_flow_scalar | list(any) |  null |
 | list_any_block_scalar | list(any) |  null |
 | docker_ports  |  list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  null | Sample complex input variable | 
@@ -44,14 +44,14 @@ The complex-blueprint.yaml definition creates the following outputs:
 | nested_complex | list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  | Sample output dynamically created |
 
 ### Input file - complex-input.yaml
-The input file defines the variable values for all the required Blueprint definition inputs. Review the file contents to observe the difference in formating for the yaml scalar and block scalar formats. 
+The input file defines the variable values for all the required Blueprint definition inputs. Review the file contents to observe the difference in formatting for the yaml scalar and block scalar formats. 
 
 | Name | Type | Value | Description |
 |------|------|------|----------------|
 | region | string | us-east | Sample var for resource deployment region |
 | resource_group | string | default | Sample var for resource group |
 | sample_var | string | testconfig | Sample var |
-| boolian_var | string | false | Sample boolian var |
+| boolean_var | string | false | Sample boolean var |
 | list_any_flow_scalar | list(any) |  ["36", "mqm-grand", "madison-circle-garden"] | list in yaml scalar format  |
 | list_any_block_scalar: | list(any) | [ <br>   "36",  <br>  "mqm-grand",  <br> "madison-circle-garden"  <br>   ] | list in yaml block scalar format |
 | docker_ports  |  list(object({  <br> internal = number <br> external = number <br> protocol = string }) |  [{  internal = 9900 <br>       external = 9900 <br>  protocol = "tcp" <br>   },  { <br>  internal = 9901 <br>  external = 9901 <br> protocol = "ldp" }] | Sample complex input variable | 
@@ -106,4 +106,4 @@ $ ibmcloud schematics blueprint delete -id blueprint_id
 
 Looking for more samples? Check out the [{{site.data.keyword.bplong_notm}} GitHub repository](https://github.com/orgs/Cloud-Schematics/repositories/?q=topic:blueprint). 
 
-Check the example Readme files for further Blueprint customisation and usage scenarios for each sample. 
+Check the example Readme files for further Blueprint customization and usage scenarios for each sample. 

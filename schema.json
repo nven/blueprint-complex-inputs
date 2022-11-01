@@ -1,0 +1,643 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "UserBlueprintV2",
+    "id$": "UserBlueprintV2",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "schema_version": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "source": {
+            "$ref": "#/$defs/UBSource"
+        },
+        "tags": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "location": {
+            "type": "string"
+        },
+        "inputs": {
+            "items": {
+                "$ref": "#/$defs/UBInput"
+            },
+            "type": "array"
+        },
+        "settings": {
+            "items": {
+                "$ref": "#/$defs/UBSetting"
+            },
+            "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "$ref": "#/$defs/UBOutput"
+            },
+            "type": "array"
+        },
+        "modules": {
+            "items": {
+                "$ref": "#/$defs/UBModule"
+            },
+            "type": "array"
+        }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+        "name",
+        "schema_version",
+        "description",
+        "inputs",
+        "settings",
+        "outputs",
+        "modules"
+    ],
+    "$defs": {
+        "UBSource": {
+            "properties": {
+                "source_type": {
+                    "enum": [
+                        "github",
+                        "catalog"
+                    ]
+                },
+                "additionalProperties": false,
+                "required": [
+                    "source_type"
+                ]
+            },
+            "oneOf": [
+                {
+                    "properties": {
+                        "git": {
+                            "$ref": "#/$defs/UBGit"
+                        }
+                    },
+                    "required": [
+                        "git"
+                    ]
+                },
+                {
+                    "properties": {
+                        "catalog": {
+                            "$ref": "#/$defs/UBCatalog"
+                        }
+                    },
+                    "required": [
+                        "catalog"
+                    ]
+                }
+            ]
+        },
+        "UBCatalog": {
+            "properties": {
+                "catalog_name": {
+                    "type": "string"
+                },
+                "offering_name": {
+                    "type": "string"
+                },
+                "offering_version": {
+                    "type": "string"
+                },
+                "offering_kind": {
+                    "type": "string"
+                },
+                "catalog_id": {
+                    "type": "string"
+                },
+                "offering_id": {
+                    "type": "string"
+                },
+                "offering_version_id": {
+                    "type": "string"
+                },
+                "offering_repo_url": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "catalog_name"
+            ]
+        },
+        "UBComponentInput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ]
+                },
+                "type": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "aliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "cloud_data_type": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "string"
+                },
+                "link_status": {
+                    "type": "string"
+                },
+                "sensitive": {
+                    "type": "boolean"
+                },
+                "immutable": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "options": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "min_value": {
+                    "type": "integer"
+                },
+                "max_value": {
+                    "type": "integer"
+                },
+                "min_length": {
+                    "type": "integer"
+                },
+                "max_length": {
+                    "type": "integer"
+                },
+                "matches": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "group_by": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "UBComponentOutput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "secure": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "UBComponentSetting": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "secure": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "UBGit": {
+            "properties": {
+                "git_repo_url": {
+                    "type": "string"
+                },
+                "git_token": {
+                    "type": "string"
+                },
+                "git_repo_folder": {
+                    "type": "string"
+                },
+                "git_release": {
+                    "type": "string"
+                },
+                "git_branch": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "git_repo_url"
+            ]
+        },
+        "UBInjector": {
+            "properties": {
+                "tft_git_url": {
+                    "type": "string"
+                },
+                "tft_git_token": {
+                    "type": "string"
+                },
+                "tft_prefix": {
+                    "type": "string"
+                },
+                "injection_type": {
+                    "type": "string"
+                },
+                "tft_name": {
+                    "type": "string"
+                },
+                "tft_parameters": {
+                    "items": {
+                        "$ref": "#/$defs/UBTFTParameter"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "tft_git_url",
+                "tft_git_token",
+                "tft_prefix",
+                "injection_type",
+                "tft_name",
+                "tft_parameters"
+            ]
+        },
+        "UBInput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ]
+                },
+                "use_default": {
+                    "type": "boolean"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "aliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "cloud_data_type": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "string"
+                },
+                "link_status": {
+                    "type": "string"
+                },
+                "sensitive": {
+                    "type": "boolean"
+                },
+                "immutable": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "options": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "min_value": {
+                    "type": "integer"
+                },
+                "max_value": {
+                    "type": "integer"
+                },
+                "min_length": {
+                    "type": "integer"
+                },
+                "max_length": {
+                    "type": "integer"
+                },
+                "matches": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "group_by": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "UBMetadata": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "aliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "cloud_data_type": {
+                    "type": "string"
+                },
+                "default": {
+                    "type": "string"
+                },
+                "link_status": {
+                    "type": "string"
+                },
+                "sensitive": {
+                    "type": "boolean"
+                },
+                "immutable": {
+                    "type": "boolean"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "options": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "min_value": {
+                    "type": "integer"
+                },
+                "max_value": {
+                    "type": "integer"
+                },
+                "min_length": {
+                    "type": "integer"
+                },
+                "max_length": {
+                    "type": "integer"
+                },
+                "matches": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "group_by": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "type",
+                "aliases",
+                "description",
+                "cloud_data_type",
+                "default",
+                "link_status",
+                "sensitive",
+                "immutable",
+                "hidden",
+                "required",
+                "options",
+                "min_value",
+                "max_value",
+                "min_length",
+                "max_length",
+                "matches",
+                "position",
+                "group_by",
+                "source"
+            ]
+        },
+        "UBModule": {
+            "properties": {
+                "module_id": {
+                    "type": "string"
+                },
+                "module_type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "layer": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/$defs/UBSource"
+                },
+                "injectors": {
+                    "items": {
+                        "$ref": "#/$defs/UBInjector"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "type": "string"
+                },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/UBComponentInput"
+                    },
+                    "type": "array"
+                },
+                "settings": {
+                    "items": {
+                        "$ref": "#/$defs/UBComponentSetting"
+                    },
+                    "type": "array"
+                },
+                "outputs": {
+                    "items": {
+                        "$ref": "#/$defs/UBComponentOutput"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "module_type",
+                "name",
+                "source",
+                "inputs",
+                "outputs"
+            ]
+        },
+        "UBOutput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "use_default": {
+                    "type": "boolean"
+                },
+                "metadata": {
+                    "$ref": "#/$defs/UBMetadata"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "UBSetting": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ]
+                },
+                "use_default": {
+                    "type": "boolean"
+                },
+                "metadata": {
+                    "$ref": "#/$defs/UBMetadata"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "UBTFTParameter": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        }
+    }
+}

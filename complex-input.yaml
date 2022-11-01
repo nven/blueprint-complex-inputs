@@ -4,21 +4,19 @@ sample_var: testconfig
 # Complex vars - https://yaml-multiline.info/
 # HCL type for variable is defined in blueprint module
 
-# Block scalar literal 
-list_any_flow_scalar:  "[\"36\", \"mqm-grand\", \"madison-circle-garden\"]"
+# Block scalar literal
+list_any_flow_scalar: '["36", "mqm-grand", "madison-circle-garden"]'
 
-
-# Block scalar literal 
+# Block scalar literal
 list_any_block_scalar: |
-    [
-        "36", 
-        "mqm-grand", 
-        "madison-circle-garden"
-    ]
+  [
+      "36", 
+      "mqm-grand", 
+      "madison-circle-garden"
+  ]
 
-   
-# Block scalar literal - multi line       
-docker_ports: | 
+# Block scalar literal - multi line
+docker_ports: |
   [
     {
       internal = 9900
@@ -32,6 +30,4 @@ docker_ports: |
     }
   ]
 
-
-boolian_var: false  
-
+boolean_var: false
