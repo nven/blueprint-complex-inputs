@@ -1,5 +1,4 @@
 name: blueprints-complex-inputs
-# yaml-language-server: $schema=schema.json
 type: blueprint
 schema_version: "1.0.0"
 description: "Sample blueprint to demonstrate passing of complex Terraform variables"
@@ -29,6 +28,10 @@ modules:
         git_branch: "main"
     inputs:
       # default string
+      - resource_group 
+        value: $blueprint.resource_group
+      - region 
+        value: $blueprint.region
       - name: TF_VERSION
         value: 1.0
       - name: sample_var
