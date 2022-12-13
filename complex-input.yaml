@@ -1,5 +1,5 @@
 
-region: us-south
+
 # Complex vars - https://yaml-multiline.info/
 # HCL type for variable is defined in blueprint module
 
