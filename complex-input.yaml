@@ -1,6 +1,5 @@
 resource_group: default
 region: us-south
-sample_var: testconfig
 # Complex vars - https://yaml-multiline.info/
 # HCL type for variable is defined in blueprint module
 
