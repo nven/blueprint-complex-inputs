@@ -28,9 +28,9 @@ modules:
         git_branch: "main"
     inputs:
       # default string
-      - resource_group 
+      - name: resource_group 
         value: $blueprint.resource_group
-      - region 
+      - name: region 
         value: $blueprint.region
       - name: TF_VERSION
         value: 1.0
